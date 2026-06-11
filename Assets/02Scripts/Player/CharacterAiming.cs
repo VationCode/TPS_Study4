@@ -39,7 +39,7 @@ public class CharacterAiming : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0))
         {
             _weapon.StartFiring();
         }
