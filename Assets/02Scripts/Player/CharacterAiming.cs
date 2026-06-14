@@ -27,18 +27,18 @@ public class CharacterAiming : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(_animLayer)
+        /*if(_animLayer)
         {
-            /*if (Input.GetMouseButton(1))
+            *//*if (Input.GetMouseButton(1))
             {
                 _animLayer.weight += Time.deltaTime / AimDuration;
             }
             else
             {
                 _animLayer.weight -= Time.deltaTime / AimDuration;
-            }*/
+            }*//*
             _animLayer.weight = 1.0f;
-        }
+        }*/
 
     }
 }

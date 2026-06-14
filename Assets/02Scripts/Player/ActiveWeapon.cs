@@ -19,8 +19,8 @@ public class ActiveWeapon : MonoBehaviour
 
     void Start()
     {
-        _anim = GetComponent<Animator>();
-        _overrideAnim = _anim.runtimeAnimatorController as AnimatorOverrideController;
+        //_anim = GetComponent<Animator>();
+        //_overrideAnim = _anim.runtimeAnimatorController as AnimatorOverrideController;
         //_overrideAnim = new AnimatorOverrideController(_anim.runtimeAnimatorController);
         //_anim.runtimeAnimatorController = _overrideAnim;
         //_weapon = GetComponentInChildren<RaycastWeapon>();
@@ -52,11 +52,11 @@ public class ActiveWeapon : MonoBehaviour
                 _weapon.StopFiring();
             }
         }
-        else
+        /*else
         {
             HandIK.weight = 0.0f;
             _anim.SetLayerWeight(1, 0.0f);
-        }
+        }*/
     }
 
     public void Equip(RaycastWeapon p_newWeapon)
@@ -70,10 +70,10 @@ public class ActiveWeapon : MonoBehaviour
         _weapon.transform.parent = WeaponParent;
         _weapon.transform.localPosition = Vector3.zero;
         _weapon.transform.localRotation = Quaternion.identity;
-        HandIK.weight = 1.0f;
-        _anim.SetLayerWeight(1, 1.0f);
 
-        Invoke(nameof(SetAnimationDelayed), 0.001f);
+        /*HandIK.weight = 1.0f;
+        _anim.SetLayerWeight(1, 1.0f);
+        Invoke(nameof(SetAnimationDelayed), 0.001f);*/
     }
 
     private void SetAnimationDelayed()
@@ -81,7 +81,7 @@ public class ActiveWeapon : MonoBehaviour
         _overrideAnim["WeaponAnim_Empty"] = _weapon.WeaponAnimClip;
     }
 
-    [ContextMenu("Save Weapon Pose")]
+    /*[ContextMenu("Save Weapon Pose")]
     private void SaveWeaponPose()
     {
         GameObjectRecorder recorder = new GameObjectRecorder(gameObject);
@@ -91,5 +91,5 @@ public class ActiveWeapon : MonoBehaviour
         recorder.TakeSnapshot(0.0f);
         //recorder.TakeSnapshot(1f / 60f);
         recorder.SaveToClip(_weapon.WeaponAnimClip);
-    }
+    }*/
 }

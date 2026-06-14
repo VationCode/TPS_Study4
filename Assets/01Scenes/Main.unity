@@ -544,7 +544,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1057877229}
-  m_Father: {fileID: 1271476759797575946}
+  m_Father: {fileID: 1102323948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &257777460
 GameObject:
@@ -1815,6 +1815,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 204363109}
   - {fileID: 1836580188}
   - {fileID: 2016488522}
   - {fileID: 987026056}
@@ -1829,7 +1830,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102323947}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 7c34182e8c8ff2c4d888e5c1135e73f0, type: 2}
   m_CullingMode: 0
@@ -4503,7 +4504,6 @@ Transform:
   - {fileID: 4654733764460294}
   - {fileID: 6059869246356427500}
   - {fileID: 4507114791974710}
-  - {fileID: 204363109}
   - {fileID: 1102323948}
   - {fileID: 750552063}
   - {fileID: 437320790}
@@ -4866,7 +4866,7 @@ MonoBehaviour:
   WeaponParent: {fileID: 1057877229}
   WeaponRightAttach: {fileID: 408261184}
   WeaponLeftAttach: {fileID: 681757220}
-  RigController: {fileID: 0}
+  RigController: {fileID: 1102323949}
   RootObj: {fileID: 1837319975156774}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
