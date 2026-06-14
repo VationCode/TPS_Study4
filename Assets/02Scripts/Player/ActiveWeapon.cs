@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -9,15 +10,26 @@ public class ActiveWeapon : MonoBehaviour
     public Transform WeaponParent;
     public Transform WeaponRightAttach;
     public Transform WeaponLeftAttach;
+    public Animator RigController;
+    public GameObject RootObj;
 
     private RaycastWeapon _weapon;
     private Animator _anim;
     private AnimatorOverrideController _overrideAnim;
+
     void Start()
     {
         _anim = GetComponent<Animator>();
         _overrideAnim = _anim.runtimeAnimatorController as AnimatorOverrideController;
-        _weapon = GetComponentInChildren<RaycastWeapon>();
+        //_overrideAnim = new AnimatorOverrideController(_anim.runtimeAnimatorController);
+        //_anim.runtimeAnimatorController = _overrideAnim;
+        //_weapon = GetComponentInChildren<RaycastWeapon>();
+
+        RaycastWeapon existingWeapon = GetComponentInChildren<RaycastWeapon>();
+        if(existingWeapon)
+        {
+            Equip(existingWeapon);
+        }
     }
 
     // Update is called once per frame
@@ -49,6 +61,10 @@ public class ActiveWeapon : MonoBehaviour
 
     public void Equip(RaycastWeapon p_newWeapon)
     {
+        if(_weapon)
+        {
+            Destroy(_weapon.gameObject);
+        }
         _weapon = p_newWeapon;
         _weapon.RaycastDestination = CrossHairTarget;
         _weapon.transform.parent = WeaponParent;
@@ -62,7 +78,7 @@ public class ActiveWeapon : MonoBehaviour
 
     private void SetAnimationDelayed()
     {
-        _overrideAnim["WeponAnim_Empty"] = _weapon.WeaponAnimClip;
+        _overrideAnim["WeaponAnim_Empty"] = _weapon.WeaponAnimClip;
     }
 
     [ContextMenu("Save Weapon Pose")]
@@ -73,7 +89,7 @@ public class ActiveWeapon : MonoBehaviour
         recorder.BindComponentsOfType<Transform>(WeaponLeftAttach.gameObject, false);
         recorder.BindComponentsOfType<Transform>(WeaponRightAttach.gameObject, false);
         recorder.TakeSnapshot(0.0f);
+        //recorder.TakeSnapshot(1f / 60f);
         recorder.SaveToClip(_weapon.WeaponAnimClip);
-
     }
 }

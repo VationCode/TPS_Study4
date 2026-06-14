@@ -22,7 +22,6 @@ public class RaycastWeapon : MonoBehaviour
     public AnimationClip WeaponAnimClip;
 
     public Transform RaycastOrigin;
-    [HideInInspector]
     public Transform RaycastDestination; // ½ÇÁ¦ ·¹ÀÌ ºÎµúÈù Å¸°ÙÀ§Ä¡(CrossHairTarget)
 
     private Ray _ray;
