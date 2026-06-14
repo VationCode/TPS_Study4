@@ -19,8 +19,10 @@ public class RaycastWeapon : MonoBehaviour
     public ParticleSystem[] MuzzleFlashs; // Emission ²ö»óÅÂ
     public ParticleSystem HitEffect;
     public TrailRenderer BulletTracerEffect;
+    public AnimationClip WeaponAnimClip;
 
     public Transform RaycastOrigin;
+    [HideInInspector]
     public Transform RaycastDestination; // ½ÇÁ¦ ·¹ÀÌ ºÎµúÈù Å¸°ÙÀ§Ä¡(CrossHairTarget)
 
     private Ray _ray;
@@ -58,7 +60,7 @@ public class RaycastWeapon : MonoBehaviour
         _accumulatedTime += p_deltaTime;
         // FireRate = 10ÀÏ ¶§ 0.1ÃÊ, 
         float fireInterval = 1.0f / FireRate;
-        Debug.Log(_accumulatedTime + " / " + fireInterval);
+
         while (_accumulatedTime >= fireInterval)
         {
             FireBullet();

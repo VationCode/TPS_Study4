@@ -9,13 +9,13 @@ public class CharacterAiming : MonoBehaviour
     private Rig _animLayer;
 
     private Camera _mainCamera;
-    private RaycastWeapon _weapon;
+
     void Start()
     {
         _mainCamera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        _weapon = GetComponentInChildren<RaycastWeapon>();
+        
     }
 
     // Update is called once per frame
@@ -29,28 +29,16 @@ public class CharacterAiming : MonoBehaviour
     {
         if(_animLayer)
         {
-            if (Input.GetMouseButton(1))
+            /*if (Input.GetMouseButton(1))
             {
                 _animLayer.weight += Time.deltaTime / AimDuration;
             }
             else
             {
                 _animLayer.weight -= Time.deltaTime / AimDuration;
-            }
+            }*/
+            _animLayer.weight = 1.0f;
         }
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            _weapon.StartFiring();
-        }
-        if(_weapon.IsFiring)
-        {
-            _weapon.UpdateFiring(Time.deltaTime);
-        }
-        _weapon.UpdateBullets(Time.deltaTime);
-        if(Input.GetMouseButtonUp(0))
-        {
-            _weapon.StopFiring();
-        }
     }
 }
