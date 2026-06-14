@@ -20,6 +20,7 @@ public class RaycastWeapon : MonoBehaviour
     public ParticleSystem HitEffect;
     public TrailRenderer BulletTracerEffect;
     public AnimationClip WeaponAnimClip;
+    public string WeaponName;
 
     public Transform RaycastOrigin;
     public Transform RaycastDestination; // ½ÇÁ¦ ·¹ÀÌ ºÎµúÈù Å¸°ÙÀ§Ä¡(CrossHairTarget)

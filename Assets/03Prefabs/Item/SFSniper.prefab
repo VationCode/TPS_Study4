@@ -58,6 +58,7 @@ MonoBehaviour:
   HitEffect: {fileID: 3701735225523844898}
   BulletTracerEffect: {fileID: 4781291644230253804, guid: 4cacc51e38ffc32478789a7dfdde8f31, type: 3}
   WeaponAnimClip: {fileID: 7400000, guid: 20d47f0f14ab53d4da2f4812bc86eecf, type: 2}
+  WeaponName: Sniper
   RaycastOrigin: {fileID: 1994973871329405158}
   RaycastDestination: {fileID: 0}
 --- !u!1 &8712220786974589825

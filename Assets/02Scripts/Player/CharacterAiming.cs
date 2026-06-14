@@ -5,17 +5,18 @@ public class CharacterAiming : MonoBehaviour
 {
     public float TurnSpeed = 15f;
     public float AimDuration = 0.18f;
-    [SerializeField]
-    private Rig _animLayer;
+    //[SerializeField]
+    //private Rig _animLayer;
 
     private Camera _mainCamera;
-
+    private RaycastWeapon _weapon;
     void Start()
     {
         _mainCamera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
+        _weapon = GetComponentInChildren<RaycastWeapon>();
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class CharacterAiming : MonoBehaviour
     {
         /*if(_animLayer)
         {
-            *//*if (Input.GetMouseButton(1))
+            /*if (Input.GetMouseButton(1))
             {
                 _animLayer.weight += Time.deltaTime / AimDuration;
             }
@@ -40,5 +41,21 @@ public class CharacterAiming : MonoBehaviour
             _animLayer.weight = 1.0f;
         }*/
 
+        if(_weapon)
+        {
+            if(Input.GetButtonDown("Fire1"))
+            {
+                _weapon.StartFiring();
+            }
+            if(_weapon.IsFiring)
+            {
+                _weapon.UpdateFiring(Time.deltaTime);
+            }
+            _weapon.UpdateBullets(Time.deltaTime);
+            if(Input.GetButtonUp("Fire1"))
+            {
+                _weapon.StopFiring();
+            }
+        }
     }
 }

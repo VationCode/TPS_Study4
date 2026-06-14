@@ -89,6 +89,7 @@ MonoBehaviour:
   HitEffect: {fileID: 6357366257783547658}
   BulletTracerEffect: {fileID: 4781291644230253804, guid: 4cacc51e38ffc32478789a7dfdde8f31, type: 3}
   WeaponAnimClip: {fileID: 7400000, guid: 562038c016514eb44be28c358bf1e9d9, type: 2}
+  WeaponName: Rifle
   RaycastOrigin: {fileID: 4937564966777509068}
   RaycastDestination: {fileID: 0}
 --- !u!1001 &2442984661823591236
