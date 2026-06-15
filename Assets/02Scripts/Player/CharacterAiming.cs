@@ -41,7 +41,7 @@ public class CharacterAiming : MonoBehaviour
             _animLayer.weight = 1.0f;
         }*/
 
-        if(_weapon)
+        /*if(_weapon)
         {
             if(Input.GetButtonDown("Fire1"))
             {
@@ -56,6 +56,6 @@ public class CharacterAiming : MonoBehaviour
             {
                 _weapon.StopFiring();
             }
-        }
+        }*/
     }
 }

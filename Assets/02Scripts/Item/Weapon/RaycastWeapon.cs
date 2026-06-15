@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -10,12 +11,15 @@ public class RaycastWeapon : MonoBehaviour
         public Vector3 InitialPosion;
         public Vector3 InitialVelocity;
         public TrailRenderer Tracer;
+        public int Bounce;
     }
+    public ActiveWeapon.EWeaponSlot WeponSlot;
     public bool IsFiring = false;
     [Tooltip("발사 빈도, 초당 몇발")]
     public int FireRate = 25;
     public float BulletSpeed = 1000.0f;
     public float BulletDrop = 0.0f;
+    public int MaxBounces = 0;
     public ParticleSystem[] MuzzleFlashs; // Emission 끈상태
     public ParticleSystem HitEffect;
     public TrailRenderer BulletTracerEffect;
@@ -47,6 +51,8 @@ public class RaycastWeapon : MonoBehaviour
         bullet.Time = 0.0f;
         bullet.Tracer = Instantiate(BulletTracerEffect, p_pos, Quaternion.identity);
         bullet.Tracer.AddPosition(p_pos);
+        bullet.Bounce = MaxBounces;
+
         return bullet;
     }
     public void StartFiring()
@@ -54,6 +60,23 @@ public class RaycastWeapon : MonoBehaviour
         IsFiring = true;
         _accumulatedTime = 0.0f;
         FireBullet();
+    }
+
+    public void UpdateWeapon(float p_deltaTime)
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            StartFiring();
+        }
+        if (IsFiring)
+        {
+            UpdateFiring(Time.deltaTime);
+        }
+        UpdateBullets(Time.deltaTime);
+        if (Input.GetButtonUp("Fire1"))
+        {
+            StopFiring();
+        }
     }
     public void UpdateFiring(float p_deltaTime)
     {
@@ -129,6 +152,22 @@ public class RaycastWeapon : MonoBehaviour
 
             p_bullet.Tracer.transform.position = _hitInfo.point;
             p_bullet.Time = maxLifetime;
+
+            // Bullet Ricochet (MaxBounces만큼 반사되어 튕겨나가끔 하는 기능) 특별한 무기 있을 시
+            if(p_bullet.Bounce > 0)
+            {
+                p_bullet.Time = 0;
+                p_bullet.InitialPosion = _hitInfo.point;
+                p_bullet.InitialVelocity = Vector3.Reflect(p_bullet.InitialVelocity, _hitInfo.normal);
+                p_bullet.Bounce--;
+            }
+
+            // Collision impulse
+            var rb2d = _hitInfo.collider.GetComponent<Rigidbody>();
+            if(rb2d)
+            {
+                rb2d.AddForceAtPosition(_ray.direction * 20, _hitInfo.point, ForceMode.Impulse);
+            }
         }
         else
             p_bullet.Tracer.transform.position = p_end;
