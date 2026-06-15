@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7456721362154635389}
   - component: {fileID: 1509778941579539501}
+  - component: {fileID: -2236843900950571849}
+  - component: {fileID: -9029461889708747324}
   m_Layer: 0
   m_Name: SFSniper
   m_TagString: Untagged
@@ -48,10 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7890006bb1c09a4f83f09e761a5fd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeponSlot: 0
   IsFiring: 0
   FireRate: 1
-  BulletSpeed: 1000
+  BulletSpeed: 10
   BulletDrop: 0
+  MaxBounces: 0
   MuzzleFlashs:
   - {fileID: 7216215791546023683}
   - {fileID: 1589029900946486853}
@@ -61,6 +65,97 @@ MonoBehaviour:
   WeaponName: Sniper
   RaycastOrigin: {fileID: 1994973871329405158}
   RaycastDestination: {fileID: 0}
+  Recoil: {fileID: 0}
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &-2236843900950571849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446674362504691399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d280cbe2e55eb0845b56578b12b84af5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerCamera: {fileID: 0}
+  CameraShake: {fileID: 0}
+  RecoilPattern:
+  - {x: 10, y: 50}
+  - {x: 7, y: 50}
+  - {x: 5, y: 50}
+  - {x: 2, y: 50}
+  - {x: 1, y: 50}
+  - {x: -2, y: 50}
+  - {x: -5, y: 50}
+  - {x: -7, y: 50}
+  - {x: -10, y: 50}
+  - {x: -7, y: 50}
+  - {x: -5, y: 50}
+  - {x: -2, y: 50}
+  - {x: -1, y: 50}
+  - {x: 1, y: 50}
+  - {x: 2, y: 50}
+  - {x: 5, y: 50}
+  - {x: 7, y: 50}
+  - {x: 1, y: 50}
+  Duration: 0.1
+--- !u!114 &-9029461889708747324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446674362504691399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 1
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 11400000, guid: c27ae9cc3c247b64f8794af368b71c11, type: 2}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &8712220786974589825
 GameObject:
   m_ObjectHideFlags: 0

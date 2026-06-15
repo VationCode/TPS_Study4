@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6210409074939992030}
   - component: {fileID: 6382392545405856842}
   - component: {fileID: 5688820741028981173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPickup_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,6 +131,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6117020320770723563}
     m_Modifications:
+    - target: {fileID: 1297439634905080845, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608877596929280260, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656447098217506550, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958706701289974608, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389823030355607152, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886640090846790243, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3699612562426939897, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45
@@ -183,9 +207,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3809222279368906971, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809222280668562653, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809222280786854643, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977884912532728517, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4043241439066821443, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
       propertyPath: m_Name
       value: Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043241439066821443, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562552105092029558, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616622514614333431, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826274034825482017, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316491612061502849, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479580014174137858, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573856336608103798, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287266673470792506, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625960154877500632, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706235142239404781, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

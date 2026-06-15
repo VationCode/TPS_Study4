@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8113837392079203617}
   - component: {fileID: 2026658898583825791}
   - component: {fileID: 8314306724692468226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPickup_Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,9 +183,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7280067260370873205, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6278060687997668810, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1972690881437947003, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -650433988561056430, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
       propertyPath: m_Name
       value: Sci-Fi_Gun_sketchfab
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338907542292945799, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707026095960104408, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753295699001082877, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8592408913740445013, guid: e39abdd4b56e9084db5f9f5d224f6bac, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

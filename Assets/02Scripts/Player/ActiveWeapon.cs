@@ -17,7 +17,7 @@ public class ActiveWeapon : MonoBehaviour
     public Rig HandIK;
     public Transform[] WeaponSlots;
     public Animator RigController;
-    public CinemachineFreeLook playerCamera;
+    public CinemachineCamera PlayerCamera;
     /*public Transform WeaponRightAttach;
     public Transform WeaponLeftAttach;
     public GameObject RootObj;*/
@@ -85,6 +85,8 @@ public class ActiveWeapon : MonoBehaviour
         }
         weapon = p_newWeapon;
         weapon.RaycastDestination = CrossHairTarget;
+        weapon.Recoil.PlayerCamera = PlayerCamera;
+        weapon.Recoil.RigController = RigController;
         weapon.transform.SetParent(WeaponSlots[weaponSlotIndex],false);
         _equippedWeapons[weaponSlotIndex] = weapon;
 

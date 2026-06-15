@@ -13,6 +13,7 @@ public class RaycastWeapon : MonoBehaviour
         public TrailRenderer Tracer;
         public int Bounce;
     }
+    
     public ActiveWeapon.EWeaponSlot WeponSlot;
     public bool IsFiring = false;
     [Tooltip("¹ß»ç ºóµµ, ÃÊ´ç ¸î¹ß")]
@@ -28,6 +29,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public Transform RaycastOrigin;
     public Transform RaycastDestination; // ½ÇÁ¦ ·¹ÀÌ ºÎµúÈù Å¸°ÙÀ§Ä¡(CrossHairTarget)
+    [HideInInspector] public WeaponRecoil Recoil;
 
     private Ray _ray;
     private RaycastHit _hitInfo;
@@ -35,6 +37,13 @@ public class RaycastWeapon : MonoBehaviour
 
     private List<Bullet> _bulletList = new List<Bullet>();
     private float maxLifetime = 3.0f;
+    [SerializeField]
+    private LayerMask _hitMask;
+    private void Awake()
+    {
+        Recoil = GetComponent<WeaponRecoil>();
+        
+    }
     Vector3 GetPosition(Bullet p_bullet)
     {
         // pos + velocity * time + 0.5 * gravity * time *time = Æ÷¹° (³«ÇÏ Åºµµ, ¼Ó·Â ³·°Ô µå¶ø ³ôÀÌ¸é ¶³¾îÁü)
@@ -59,7 +68,8 @@ public class RaycastWeapon : MonoBehaviour
     {
         IsFiring = true;
         _accumulatedTime = 0.0f;
-        FireBullet();
+        Recoil.Reset();
+        //FireBullet();
     }
 
     public void UpdateWeapon(float p_deltaTime)
@@ -143,7 +153,7 @@ public class RaycastWeapon : MonoBehaviour
         _ray.origin = p_start;
         _ray.direction = direction;
 
-        if (Physics.Raycast(_ray, out _hitInfo, distance))
+        if (Physics.Raycast(_ray, out _hitInfo, distance, _hitMask))
         {
             //Debug.DrawLine(_ray.origin, _hitInfo.point, Color.red, 1.0f);
             HitEffect.transform.position = _hitInfo.point;
@@ -183,6 +193,10 @@ public class RaycastWeapon : MonoBehaviour
         Vector3 velocity = (RaycastDestination.position - RaycastOrigin.position).normalized * BulletSpeed;
         var bullet = CreateBullet(RaycastOrigin.position, velocity);
         _bulletList.Add(bullet);
+
+        Recoil.GenerateRecoil(WeaponName);
+
+        Debug.DrawLine(RaycastOrigin.position, RaycastDestination.position, Color.red, 1f);
     }
     public void StopFiring()
     {
