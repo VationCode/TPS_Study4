@@ -42,9 +42,12 @@ public class ReloadWeapon : MonoBehaviour
             case "DetachMagazine":
                 DetachMagazine();
                 break;
-            /*case "RefillMagazine":
+            case "DropMagazine":
+                DropMagazine();
+                break;
+            case "RefillMagazine":
                 RefillMagazine();
-                break;*/
+                break;
             case "AttachMagazine":
                 AttachMagazine();
                 break;
@@ -58,11 +61,14 @@ public class ReloadWeapon : MonoBehaviour
     }
     private void DropMagazine()
     {
-
+        GameObject droppedMagazine = Instantiate(_magazineHand, _magazineHand.transform.position, _magazineHand.transform.rotation);
+        droppedMagazine.AddComponent<Rigidbody>();
+        droppedMagazine.AddComponent<BoxCollider>();
+        _magazineHand.SetActive(false);
     }
     private void RefillMagazine()
     {
-
+        _magazineHand.SetActive(true);
     }
     private void AttachMagazine()
     {
