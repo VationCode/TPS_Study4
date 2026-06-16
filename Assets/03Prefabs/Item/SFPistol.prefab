@@ -56,6 +56,8 @@ MonoBehaviour:
   BulletSpeed: 1000
   BulletDrop: 0
   MaxBounces: 0
+  AmmoCount: 15
+  MaxAmmoSize: 15
   MuzzleFlashs:
   - {fileID: 5148588634647804153}
   - {fileID: 3844682462240321983}
@@ -65,10 +67,11 @@ MonoBehaviour:
   WeaponName: Pistol
   RaycastOrigin: {fileID: 2955321528712762472}
   RaycastDestination: {fileID: 0}
-  Recoil: {fileID: 0}
+  Magazine: {fileID: 1690632489429883920}
   _hitMask:
     serializedVersion: 2
     m_Bits: 1
+  Recoil: {fileID: 0}
 --- !u!114 &-25256973969873384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +389,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3809222279368906971, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4043241439066821443, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -398,5 +405,10 @@ PrefabInstance:
 --- !u!4 &1224112922867633458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3699612562426939897, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
+  m_PrefabInstance: {fileID: 2570225191069828299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1690632489429883920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3809222279368906971, guid: 726cd21416e138640a4f2575ffe04009, type: 3}
   m_PrefabInstance: {fileID: 2570225191069828299}
   m_PrefabAsset: {fileID: 0}

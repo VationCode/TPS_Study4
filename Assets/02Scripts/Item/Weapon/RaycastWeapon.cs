@@ -19,26 +19,35 @@ public class RaycastWeapon : MonoBehaviour
     [Tooltip("¹ß»ç ºóµµ, ÃÊ´ç ¸î¹ß")]
     public int FireRate = 25;
     public float BulletSpeed = 1000.0f;
+    [Tooltip("Åº ³«ÇÏ(½ºÇÇµå ³·°Ô µå¶ø ³ô°Ô)")]
     public float BulletDrop = 0.0f;
+    [Tooltip("Åº Æ¨±è ºóµµ")]
     public int MaxBounces = 0;
+    public int AmmoCount;
+    public int MaxAmmoSize;
+
     public ParticleSystem[] MuzzleFlashs; // Emission ²ö»óÅÂ
     public ParticleSystem HitEffect;
     public TrailRenderer BulletTracerEffect;
-    public AnimationClip WeaponAnimClip;
+    public AnimationClip WeaponAnimClip;        // WeaponÀÇ Idle Å¬¸³
     public string WeaponName;
 
     public Transform RaycastOrigin;
     public Transform RaycastDestination; // ½ÇÁ¦ ·¹ÀÌ ºÎµúÈù Å¸°ÙÀ§Ä¡(CrossHairTarget)
-    [HideInInspector] public WeaponRecoil Recoil;
+    
+    public GameObject Magazine;
+    
+    [SerializeField]
+    private LayerMask _hitMask;
 
+    [HideInInspector] public WeaponRecoil Recoil;
     private Ray _ray;
     private RaycastHit _hitInfo;
     private float _accumulatedTime;
 
     private List<Bullet> _bulletList = new List<Bullet>();
     private float maxLifetime = 3.0f;
-    [SerializeField]
-    private LayerMask _hitMask;
+
     private void Awake()
     {
         Recoil = GetComponent<WeaponRecoil>();
@@ -184,6 +193,9 @@ public class RaycastWeapon : MonoBehaviour
     }
     private void FireBullet()
     {
+        if (AmmoCount <= 0) return;
+
+        AmmoCount--;
         foreach (var firing in MuzzleFlashs)
         {
             firing.Emit(1);

@@ -21,14 +21,19 @@ public class ActiveWeapon : MonoBehaviour
     /*public Transform WeaponRightAttach;
     public Transform WeaponLeftAttach;
     public GameObject RootObj;*/
+    public AmmoWidget AmmoUI;
 
     private RaycastWeapon[] _equippedWeapons = new RaycastWeapon[2];
     private int _activeWeaponIndex;
     private bool _isHolstered = false;
-    
+
 
     //private Animator _anim;
     //private AnimatorOverrideController _overrideAnim;
+    public RaycastWeapon GetActiveWeapon()
+    {
+        return GetWeapon(_activeWeaponIndex);
+    }
 
     void Start()
     {
@@ -39,6 +44,7 @@ public class ActiveWeapon : MonoBehaviour
         //_weapon = GetComponentInChildren<RaycastWeapon>();
 
         RaycastWeapon existingWeapon = GetComponentInChildren<RaycastWeapon>();
+
         if(existingWeapon)
         {
             Equip(existingWeapon);
@@ -91,6 +97,8 @@ public class ActiveWeapon : MonoBehaviour
         _equippedWeapons[weaponSlotIndex] = weapon;
 
         SetActiveWeapon(weaponSlotIndex);
+
+        AmmoUI.Refresh(weapon.AmmoCount);
     }
 
     private void ToggleActiveWeapon()
