@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeponSlot: 0
   IsFiring: 0
-  FireRate: 25
+  FireRate: 15
   BulletSpeed: 1000
   BulletDrop: 0
   MaxBounces: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   BulletTracerEffect: {fileID: 4781291644230253804, guid: 4cacc51e38ffc32478789a7dfdde8f31, type: 3}
   WeaponAnimClip: {fileID: 7400000, guid: 562038c016514eb44be28c358bf1e9d9, type: 2}
   WeaponName: Rifle
+  FireSFX: {fileID: 8300000, guid: bddea8aea12189641ad789a470e083dd, type: 3}
   RaycastOrigin: {fileID: 4937564966777509068}
   RaycastDestination: {fileID: 0}
   Magazine: {fileID: 2311406797561297376}
@@ -115,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d280cbe2e55eb0845b56578b12b84af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCamera: {fileID: 0}
+  AimingCtrl: {fileID: 0}
   CameraShake: {fileID: 0}
   RigController: {fileID: 0}
   RecoilPattern:
@@ -138,6 +139,7 @@ MonoBehaviour:
   - {x: 7, y: 10}
   - {x: 1, y: 10}
   Duration: 0.1
+  RecoilModifier: 1
 --- !u!114 &733052460969324845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +161,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ImpulseDuration: 0.2
-    ImpulseType: 0
+    ImpulseDuration: 0.1
+    ImpulseType: 3
     DissipationRate: 0.25
     RawSignal: {fileID: 11400000, guid: c27ae9cc3c247b64f8794af368b71c11, type: 2}
     AmplitudeGain: 1
@@ -190,7 +192,7 @@ MonoBehaviour:
     DissipationMode: 2
     DissipationDistance: 100
     PropagationSpeed: 343
-  DefaultVelocity: {x: 0, y: -1, z: 0}
+  DefaultVelocity: {x: 0, y: 1, z: 0}
 --- !u!1001 &696844496354886522
 PrefabInstance:
   m_ObjectHideFlags: 0

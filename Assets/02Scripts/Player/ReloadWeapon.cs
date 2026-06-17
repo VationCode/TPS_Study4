@@ -7,6 +7,7 @@ public class ReloadWeapon : MonoBehaviour
     public ActiveWeapon CurrentActiveWeapon;
     public Transform LeftHand;
     public AmmoWidget AmmoUI;
+    public bool IsReloading;
 
     GameObject _magazineHand;
     private void Awake()
@@ -25,6 +26,7 @@ public class ReloadWeapon : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R) || weapon.AmmoCount <= 0)
             {
+                IsReloading = true;
                 RigController.SetTrigger("Reload");
             }
 
@@ -58,12 +60,22 @@ public class ReloadWeapon : MonoBehaviour
         RaycastWeapon weapon = CurrentActiveWeapon.GetActiveWeapon();
         _magazineHand = Instantiate(weapon.Magazine, LeftHand, true);
         weapon.Magazine.SetActive(false);
+        AudioManager.Instance.ReloadDetachMagazine();
     }
     private void DropMagazine()
     {
         GameObject droppedMagazine = Instantiate(_magazineHand, _magazineHand.transform.position, _magazineHand.transform.rotation);
         droppedMagazine.AddComponent<Rigidbody>();
-        droppedMagazine.AddComponent<BoxCollider>();
+
+        BoxCollider boxCollider;
+        if(droppedMagazine.TryGetComponent<BoxCollider>(out boxCollider))
+        {
+            boxCollider.enabled = true;
+        }
+        else
+        {
+            droppedMagazine.AddComponent<BoxCollider>();
+        }
         _magazineHand.SetActive(false);
     }
     private void RefillMagazine()
@@ -77,7 +89,8 @@ public class ReloadWeapon : MonoBehaviour
         weapon.Magazine.SetActive(true);
         weapon.AmmoCount = weapon.MaxAmmoSize;
         RigController.ResetTrigger("Reload");
-
+        AudioManager.Instance.ReloadAttachMagazine();
         AmmoUI.Refresh(weapon.AmmoCount);
+        IsReloading = false;
     }
 }

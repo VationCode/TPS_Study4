@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponRecoil : MonoBehaviour
 {
     [HideInInspector]
-    public CinemachineCamera PlayerCamera;
+    public CharacterAiming AimingCtrl;
     // 예전 버전의 시네머신에서 FreeLook의 YAxis에 해당하는 신버전의 컴포넌트
     private CinemachineOrbitalFollow _orbitalFollow;
     [HideInInspector]
@@ -14,6 +14,7 @@ public class WeaponRecoil : MonoBehaviour
 
     public Vector2[] RecoilPattern;
     public float Duration;
+    public float RecoilModifier = 1.0f;
 
     private float _verticalRecoil;
     private float _horizontalRecoil;
@@ -28,8 +29,8 @@ public class WeaponRecoil : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerCamera != null)
-            _orbitalFollow = PlayerCamera.GetComponent<CinemachineOrbitalFollow>();
+        /*if (PlayerCamera != null)
+            _orbitalFollow = PlayerCamera.GetComponent<CinemachineOrbitalFollow>();*/
     }
 
     public void Reset()
@@ -39,12 +40,12 @@ public class WeaponRecoil : MonoBehaviour
 
     void Update()
     {
-        if (_orbitalFollow != null)
+        if (AimingCtrl != null)
         {
             if (_time > 0)
             {
-                _orbitalFollow.VerticalAxis.Value -= ((_verticalRecoil/10) * Time.deltaTime) / Duration; 
-                _orbitalFollow.HorizontalAxis.Value -= ((_horizontalRecoil/10) * Time.deltaTime) / Duration;
+                AimingCtrl.YAxis.Value -= (((_verticalRecoil/10) * Time.deltaTime) / Duration) * RecoilModifier;
+                AimingCtrl.XAxis.Value -= (((_horizontalRecoil/10) * Time.deltaTime) / Duration) * RecoilModifier;
                 _time -= Time.deltaTime;
             }
         }

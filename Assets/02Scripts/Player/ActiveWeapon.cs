@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class ActiveWeapon : MonoBehaviour
 {
@@ -13,26 +14,30 @@ public class ActiveWeapon : MonoBehaviour
         Secondary = 1
     }
 
+    private RaycastWeapon[] _equippedWeapons = new RaycastWeapon[2];
+    private ReloadWeapon _reloadWeapon;
+
     public Transform CrossHairTarget;
     public Rig HandIK;
     public Transform[] WeaponSlots;
+    public CharacterAiming AimingCtrl;
     public Animator RigController;
-    public CinemachineCamera PlayerCamera;
+    //public CinemachineCamera PlayerCamera;
     /*public Transform WeaponRightAttach;
     public Transform WeaponLeftAttach;
     public GameObject RootObj;*/
     public AmmoWidget AmmoUI;
+    public bool IsSwapWeapon;
 
-    private RaycastWeapon[] _equippedWeapons = new RaycastWeapon[2];
     private int _activeWeaponIndex;
     private bool _isHolstered = false;
 
-
     //private Animator _anim;
     //private AnimatorOverrideController _overrideAnim;
-    public RaycastWeapon GetActiveWeapon()
+
+    private void Awake()
     {
-        return GetWeapon(_activeWeaponIndex);
+        _reloadWeapon = GetComponent<ReloadWeapon>();
     }
 
     void Start()
@@ -50,6 +55,16 @@ public class ActiveWeapon : MonoBehaviour
             Equip(existingWeapon);
         }
     }
+    public RaycastWeapon GetActiveWeapon()
+    {
+        return GetWeapon(_activeWeaponIndex);
+    }
+    public bool IsFiring()
+    {
+        RaycastWeapon currentWeapon = GetActiveWeapon();
+        if (!currentWeapon) return false;
+        return currentWeapon.IsFiring;
+    }
 
     RaycastWeapon GetWeapon(int p_index)
     {
@@ -59,11 +74,13 @@ public class ActiveWeapon : MonoBehaviour
     void Update()
     {
         var weapon = GetWeapon(_activeWeaponIndex);
-        if(weapon && !_isHolstered)
-        {
-            weapon.UpdateWeapon(Time.deltaTime);
-        }
+        bool notSprinting = RigController.GetCurrentAnimatorStateInfo(2).shortNameHash == Animator.StringToHash("NotSprinting");
+        bool isReloading = _reloadWeapon.IsReloading;
 
+        if (weapon && !_isHolstered && notSprinting)
+        {
+            weapon.UpdateWeapon(Time.deltaTime, isReloading);
+        }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -91,7 +108,7 @@ public class ActiveWeapon : MonoBehaviour
         }
         weapon = p_newWeapon;
         weapon.RaycastDestination = CrossHairTarget;
-        weapon.Recoil.PlayerCamera = PlayerCamera;
+        weapon.Recoil.AimingCtrl = AimingCtrl;
         weapon.Recoil.RigController = RigController;
         weapon.transform.SetParent(WeaponSlots[weaponSlotIndex],false);
         _equippedWeapons[weaponSlotIndex] = weapon;
@@ -130,6 +147,7 @@ public class ActiveWeapon : MonoBehaviour
 
     private IEnumerator SwitchWeapon(int p_holsterIndex,int p_activateIndex)
     {
+        RigController.SetInteger("WeaponIndex", p_activateIndex);
         yield return StartCoroutine(HolsterWeapon(p_holsterIndex));
         yield return StartCoroutine(ActivateWeapon(p_activateIndex));
         _activeWeaponIndex = p_activateIndex;
@@ -137,6 +155,7 @@ public class ActiveWeapon : MonoBehaviour
 
     private IEnumerator HolsterWeapon(int p_index)
     {
+        IsSwapWeapon = true;
         _isHolstered = true;
         var weapon = GetWeapon(p_index);
         if(weapon)
@@ -148,9 +167,11 @@ public class ActiveWeapon : MonoBehaviour
             }
             while (RigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
         }
+        IsSwapWeapon = false;
     }
     private IEnumerator ActivateWeapon(int p_index)
     {
+        IsSwapWeapon = true;
         var weapon = GetWeapon(p_index);
         if (weapon)
         {
@@ -163,6 +184,7 @@ public class ActiveWeapon : MonoBehaviour
             while (RigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
             _isHolstered = false;
         }
+        IsSwapWeapon = false;
     }
 
     /*private void SetAnimationDelayed()

@@ -31,6 +31,7 @@ public class RaycastWeapon : MonoBehaviour
     public TrailRenderer BulletTracerEffect;
     public AnimationClip WeaponAnimClip;        // WeaponÀÇ Idle Å¬¸³
     public string WeaponName;
+    public AudioClip FireSFX;
 
     public Transform RaycastOrigin;
     public Transform RaycastDestination; // ½ÇÁ¦ ·¹ÀÌ ºÎµúÈù Å¸°ÙÀ§Ä¡(CrossHairTarget)
@@ -81,8 +82,14 @@ public class RaycastWeapon : MonoBehaviour
         //FireBullet();
     }
 
-    public void UpdateWeapon(float p_deltaTime)
+    public void UpdateWeapon(float p_deltaTime, bool isReloading)
     {
+        if (isReloading)
+        {
+            StopFiring();
+            return;
+        }
+
         if (Input.GetButtonDown("Fire1"))
         {
             StartFiring();
@@ -107,6 +114,8 @@ public class RaycastWeapon : MonoBehaviour
         {
             FireBullet();
             _accumulatedTime -= fireInterval;
+            if(FireSFX != null)
+            AudioManager.Instance.PlayOneShotSFX(FireSFX);
         }
     }
     public void UpdateBullets(float p_delaTime)
@@ -164,7 +173,6 @@ public class RaycastWeapon : MonoBehaviour
 
         if (Physics.Raycast(_ray, out _hitInfo, distance, _hitMask))
         {
-            //Debug.DrawLine(_ray.origin, _hitInfo.point, Color.red, 1.0f);
             HitEffect.transform.position = _hitInfo.point;
             HitEffect.transform.forward = _hitInfo.normal;
             HitEffect.Emit(1);
@@ -208,7 +216,7 @@ public class RaycastWeapon : MonoBehaviour
 
         Recoil.GenerateRecoil(WeaponName);
 
-        Debug.DrawLine(RaycastOrigin.position, RaycastDestination.position, Color.red, 1f);
+        //Debug.DrawLine(RaycastOrigin.position, RaycastDestination.position, Color.red, 1f);
     }
     public void StopFiring()
     {

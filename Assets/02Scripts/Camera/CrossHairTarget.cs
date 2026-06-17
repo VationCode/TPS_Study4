@@ -7,6 +7,8 @@ public class CrossHairTarget : MonoBehaviour
     private RaycastHit _hitInfo;
     [SerializeField]
     private LayerMask _hitMask;
+    [SerializeField]
+    private float _maxDistance = 1000;
     private void Start()
     {
         _mainCamera = Camera.main;
@@ -17,7 +19,7 @@ public class CrossHairTarget : MonoBehaviour
         _ray.origin = _mainCamera.transform.position;
         _ray.direction = _mainCamera.transform.forward;
 
-        if(Physics.Raycast(_ray, out _hitInfo, _hitMask))
+        if(Physics.Raycast(_ray, out _hitInfo, _maxDistance, _hitMask))
         {
             transform.position = _hitInfo.point;
         }

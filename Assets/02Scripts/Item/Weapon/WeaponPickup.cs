@@ -11,6 +11,7 @@ public class WeaponPickup : MonoBehaviour
         {
             RaycastWeapon newWeapon = Instantiate(WeaponPrefab);
             activeWeapon.Equip(newWeapon);
+            AudioManager.Instance.PickupSFX();
         }
     }
 }

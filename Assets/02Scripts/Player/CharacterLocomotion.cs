@@ -1,8 +1,16 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class CharacterLocomotion : MonoBehaviour
 {
+    private CharacterController _characterCtrl;
+    private Animator _anim;
+    private ActiveWeapon _activeWeapon;
+    private ReloadWeapon _reloadWeapon;
+    private CharacterAiming _aiming;
+
+    [SerializeField]
+    private Animator _rigController;
+
     [Range(1f, 3f),SerializeField]
     private float _moveSpee = 1.5f;
     [SerializeField]
@@ -18,17 +26,22 @@ public class CharacterLocomotion : MonoBehaviour
     [SerializeField]
     private float _pushPower = 2;
 
-    private CharacterController _characterCtrl;
-    private Animator _anim;
 
     private Vector2 _input;
     private Vector3 _rootMotion;
     private Vector3 _velocity;
     private bool _isJumping;
+
+    private int _isSprintingParam = Animator.StringToHash("IsSprinting");
+
+
     void Awake()
     {
         _anim = GetComponent<Animator>();
         _characterCtrl = GetComponent<CharacterController>();
+        _activeWeapon = GetComponent<ActiveWeapon>();
+        _reloadWeapon = GetComponent<ReloadWeapon>();
+        _aiming = GetComponent<CharacterAiming>();
     }
 
     private void FixedUpdate()
@@ -75,13 +88,34 @@ public class CharacterLocomotion : MonoBehaviour
         _input.x = Input.GetAxis("Horizontal");
         _input.y = Input.GetAxis("Vertical");
 
+        if(_input.magnitude > 1) _input.Normalize();
+
         _anim.SetFloat("InputX", _input.x);
         _anim.SetFloat("InputY", _input.y);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        UpdateIsSprinting();
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
+    }
+
+    private bool IsSprinting()
+    {
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
+        bool isFiring = _activeWeapon.IsFiring();
+        bool isReloading = _reloadWeapon.IsReloading;
+        bool isSwapWeapon = _activeWeapon.IsSwapWeapon;
+        bool isAiming = _aiming.IsAiming;
+        return isSprinting && !isFiring && !isReloading && !isSwapWeapon && !isAiming;
+    }
+
+    private void UpdateIsSprinting()
+    {
+        bool isSprinting = IsSprinting();
+        _anim.SetBool(_isSprintingParam, isSprinting);
+        _rigController.SetBool(_isSprintingParam, isSprinting);
     }
 
     private void Jump()
